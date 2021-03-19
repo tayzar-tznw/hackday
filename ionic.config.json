@@ -1,0 +1,7 @@
+{
+  "name": "Gacha",
+  "integrations": {
+    "capacitor": {}
+  },
+  "type": "vue"
+}
