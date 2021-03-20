@@ -5,17 +5,21 @@
         <ion-title>設定</ion-title>
       </ion-toolbar>
     </ion-header>
-    <ion-content :fullscreen="true">
-
-    </ion-content>
+    <ion-content :fullscreen="true"> </ion-content>
   </ion-page>
 </template>
 
 <script lang="ts">
-import {IonContent, IonHeader, IonPage, IonTitle, IonToolbar} from '@ionic/vue';
+import {
+  IonContent,
+  IonHeader,
+  IonPage,
+  IonTitle,
+  IonToolbar,
+} from "@ionic/vue";
 
 export default {
-  name: 'Tab2',
-  components: {IonHeader, IonToolbar, IonTitle, IonContent, IonPage},
-}
+  name: "Tab2",
+  components: { IonHeader, IonToolbar, IonTitle, IonContent, IonPage },
+};
 </script>

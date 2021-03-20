@@ -27,49 +27,64 @@
 </template>
 
 <script lang="ts">
-import {IonContent, IonHeader, IonModal, IonPage, IonTitle, IonToolbar} from '@ionic/vue';
-import {defineComponent, ref} from "vue";
-import {RequestData, ResponseData} from "../types"
-import {SERVER_URL} from "../const"
-import Modal from '@/components/Modal.vue';
-import axios from 'axios'
+import {
+  IonContent,
+  IonHeader,
+  IonModal,
+  IonPage,
+  IonTitle,
+  IonToolbar,
+} from "@ionic/vue";
+import { defineComponent, ref } from "vue";
+import { RequestData, ResponseData } from "../types";
+import { SERVER_URL } from "../const";
+import Modal from "@/components/Modal.vue";
+import axios from "axios";
 
 export default defineComponent({
-  name: 'Tab1',
-  components: {Modal, IonModal, IonHeader, IonToolbar, IonTitle, IonContent, IonPage},
+  name: "Tab1",
+  components: {
+    Modal,
+    IonModal,
+    IonHeader,
+    IonToolbar,
+    IonTitle,
+    IonContent,
+    IonPage,
+  },
   setup() {
     const inputData = ref([]);
     const isOpenRef = ref(false);
-    const setOpen = (state: boolean) => isOpenRef.value = state;
-    const data = {content: 'New Content'};
+    const setOpen = (state: boolean) => (isOpenRef.value = state);
+    const data = { content: "New Content" };
     const send = async (): Promise<ResponseData> => {
       // TODO: ちゃんとformからdataとる
       const dammyData: RequestData = {
-        game: ["0","1", "2", "3", "4"], // 馬娘、バンドリ、原神、プロジェクト世界、パズドラ
+        game: ["0", "1", "2", "3", "4"], // 馬娘、バンドリ、原神、プロジェクト世界、パズドラ
         moneyValue: 2500,
         minimumDraw: {
           0: 2,
-            1: 1,
-            2: 0,
-            3: 2,
+          1: 1,
+          2: 0,
+          3: 2,
         },
-        mode: "1"
-      }
+        mode: "1",
+      };
 
       const res = await axios
         .post(SERVER_URL, {
-          dammyData
+          dammyData,
         })
-        .then(res => {
-          return res.data
+        .then((res) => {
+          return res.data;
         })
-        .catch(err => {
+        .catch((err) => {
           console.log(err);
-        })
-      return res as ResponseData
+        });
+      return res as ResponseData;
     };
 
-    return {isOpenRef, setOpen, data, send}
+    return { isOpenRef, setOpen, data, send };
   },
 });
 </script>
