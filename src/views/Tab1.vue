@@ -51,13 +51,13 @@
             </div>
           </ion-item-group>
         </ion-list>
-        <ion-button @click="setOpen(true)" expand="block">ガチャを追加</ion-button>
+        <ion-button @click="setOpen(true)" expand="block"
+          >ガチャを追加</ion-button
+        >
         <ion-button type="submit" expand="block">送信</ion-button>
       </form>
 
-      <ion-modal
-          :is-open="isOpenRef"
-          css-class="my-custom-class">
+      <ion-modal :is-open="isOpenRef" css-class="my-custom-class">
         <Modal @close="setOpen(false)" @submit="addData"></Modal>
       </ion-modal>
     </ion-content>
@@ -79,16 +79,16 @@ import {
   IonPage,
   IonTitle,
   IonToolbar,
-} from '@ionic/vue';
-import {defineComponent, ref} from "vue";
-import Modal from '@/components/Modal.vue';
+} from "@ionic/vue";
+import { defineComponent, ref } from "vue";
+import Modal from "@/components/Modal.vue";
 
 export default defineComponent({
-  name: 'Tab1',
+  name: "Tab1",
   data() {
     return {
       w: 0,
-    }
+    };
   },
   components: {
     Modal,
@@ -104,18 +104,18 @@ export default defineComponent({
     IonTitle,
     IonButton,
     IonContent,
-    IonPage
+    IonPage,
   },
   setup() {
     //Modalウィンドウの表示
     const isOpenRef = ref(false);
-    const setOpen = (state: boolean) => isOpenRef.value = state;
+    const setOpen = (state: boolean) => (isOpenRef.value = state);
 
     //データを送信
     const sendData = (w: number) => {
       console.log(w);
-    }
-    return {isOpenRef, setOpen, sendData}
-  }
+    };
+    return { isOpenRef, setOpen, sendData };
+  },
 });
 </script>

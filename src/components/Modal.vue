@@ -13,18 +13,32 @@
 </template>
 
 <script lang="ts">
-import {IonButton, IonButtons, IonContent, IonHeader, IonTitle, IonToolbar} from '@ionic/vue';
+import {
+  IonButton,
+  IonButtons,
+  IonContent,
+  IonHeader,
+  IonTitle,
+  IonToolbar,
+} from "@ionic/vue";
 
-import {defineComponent} from 'vue';
+import { defineComponent } from "vue";
 
 export default defineComponent({
-  name: 'Modal',
-  components: {IonHeader, IonToolbar, IonButton, IonButtons, IonTitle, IonContent},
+  name: "Modal",
+  components: {
+    IonHeader,
+    IonToolbar,
+    IonButton,
+    IonButtons,
+    IonTitle,
+    IonContent,
+  },
   data() {
     return {
-      title: '宝箱の情報',
-      content: 'Content',
-    }
-  }
+      title: "宝箱の情報",
+      content: "Content",
+    };
+  },
 });
 </script>

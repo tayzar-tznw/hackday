@@ -20,7 +20,6 @@
                 <ion-input></ion-input>
               </ion-item>
             </div>
-
           </ion-item-group>
         </ion-list>
         <ion-button type="submit" expand="block">送信</ion-button>
@@ -30,26 +29,32 @@
 </template>
 
 <script lang="ts">
-import {IonContent, IonHeader, IonPage, IonTitle, IonToolbar,} from '@ionic/vue';
-import {defineComponent, reactive, SetupContext} from "vue";
+import {
+  IonContent,
+  IonHeader,
+  IonPage,
+  IonTitle,
+  IonToolbar,
+} from "@ionic/vue";
+import { defineComponent, reactive, SetupContext } from "vue";
 
 type Props = {
   id: number;
-}
+};
 export default defineComponent({
-  name: 'FormTwo',
+  name: "FormTwo",
   props: {
     id: {
       type: Number,
       default: 0,
-    }
+    },
   },
   components: {
     IonHeader,
     IonToolbar,
     IonTitle,
     IonContent,
-    IonPage
+    IonPage,
   },
   setup(props: Props, context: SetupContext) {
     const games = reactive([
@@ -72,13 +77,13 @@ export default defineComponent({
       {
         id: 4,
         name: "パズドラ",
-      }
-    ])
+      },
+    ]);
 
     const sendData = () => {
       console.log("test");
-    }
-    return {games, sendData}
-  }
+    };
+    return { games, sendData };
+  },
 });
 </script>

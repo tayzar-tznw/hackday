@@ -4,7 +4,9 @@
       <ion-toolbar>
         <ion-title>モード選択</ion-title>
         <ion-buttons slot="end">
-          <ion-button v-if="mode === 0" @click="$router.push('/form/1')">次へ</ion-button>
+          <ion-button v-if="mode === 0" @click="$router.push('/form/1')"
+            >次へ</ion-button
+          >
           <ion-button v-else @click="$router.push('/form/2')">次へ</ion-button>
         </ion-buttons>
       </ion-toolbar>
@@ -36,15 +38,15 @@ import {
   IonPage,
   IonTitle,
   IonToolbar,
-} from '@ionic/vue';
-import {defineComponent} from "vue";
+} from "@ionic/vue";
+import { defineComponent } from "vue";
 
 export default defineComponent({
-  name: 'ChooseMode',
+  name: "ChooseMode",
   data() {
     return {
       mode: 0,
-    }
+    };
   },
   components: {
     IonInput,
@@ -55,10 +57,10 @@ export default defineComponent({
     IonToolbar,
     IonTitle,
     IonContent,
-    IonPage
+    IonPage,
   },
   setup() {
-    return {}
-  }
+    return {};
+  },
 });
 </script>
