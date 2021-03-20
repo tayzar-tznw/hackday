@@ -1,66 +1,94 @@
 <template>
   <ion-page>
-    <ion-header>
-      <ion-toolbar>
-        <ion-title>モード選択</ion-title>
-        <ion-buttons slot="end">
-          <ion-button v-if="mode === 0" @click="$router.push('/form/1')"
-            >次へ</ion-button
-          >
-          <ion-button v-else @click="$router.push('/form/2')">次へ</ion-button>
-        </ion-buttons>
-      </ion-toolbar>
-    </ion-header>
+    <div class="wrapper">
+      <h1>モードを選択</h1>
+      <div class="input-box">
+        <div class="input-box__item">
+          <label>限度金額</label>
+          <input type="text" v-model="money" required=""/>
+        </div>
+        <div class="input-box__item">
+          <label>モードを選択</label>
+          <select id="recommend" v-model="mode">
+            <option value="0">ユーザー指定</option>
+            <option value="1">カードのレア度</option>
+            <option value="2">ツイッター</option>
+          </select>
+        </div>
 
-    <ion-content :fullscreen="true">
-      <div>
-        <ion-label>限度金額</ion-label>
-        <ion-input></ion-input>
-        <ion-label>モードを選択</ion-label>
-        <select id="recommend" v-model="mode">
-          <option value="0">ユーザー指定</option>
-          <option value="1">カードのレア度</option>
-          <option value="2">ツイッター</option>
-        </select>
+        <div class="input-box__button">
+          <TheButton @click="$router.push('/mode')">次へ</TheButton>
+        </div>
       </div>
-    </ion-content>
+    </div>
   </ion-page>
 </template>
 
 <script lang="ts">
-import {
-  IonButton,
-  IonButtons,
-  IonContent,
-  IonHeader,
-  IonInput,
-  IonLabel,
-  IonPage,
-  IonTitle,
-  IonToolbar,
-} from "@ionic/vue";
-import { defineComponent } from "vue";
+import {IonButton, IonButtons, IonContent, IonHeader, IonPage, IonTitle, IonToolbar,} from "@ionic/vue";
+import {defineComponent} from "vue";
+import TheButton from '@/components/TheButton.vue';
 
 export default defineComponent({
   name: "ChooseMode",
   data() {
     return {
       mode: 0,
+      money: 0,
     };
   },
   components: {
-    IonInput,
     IonButton,
     IonButtons,
-    IonLabel,
     IonHeader,
     IonToolbar,
     IonTitle,
     IonContent,
     IonPage,
+    TheButton,
   },
   setup() {
     return {};
   },
 });
 </script>
+
+<style lang="scss">
+.input-box {
+  width: 100%;
+  height: 100%;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+
+  &__item {
+    width: 200px;
+    margin: 20px;
+  }
+
+  label {
+    text-align: left;
+    display: block;
+    color: #03e9f4;
+    font-weight: bold;
+    font-size: 1.6em;
+    margin-bottom: 10px;
+  }
+
+  input, select {
+    width: 100%;
+    height: 40px;
+    border: 1px solid white;
+    background-color: rgba(0, 0, 0, 0);
+    letter-spacing: 2px;
+    outline: none;
+    color: white;
+    font-weight: bold;
+  }
+  input{
+    padding: 10px;
+  }
+}
+
+</style>
