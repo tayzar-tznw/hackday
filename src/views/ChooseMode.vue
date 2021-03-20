@@ -17,7 +17,7 @@
         </div>
 
         <div class="input-box__button">
-          <TheButton @click="$router.push('/mode')">次へ</TheButton>
+          <TheButton @click="$router.push('/form')">次へ</TheButton>
         </div>
       </div>
     </div>
@@ -26,17 +26,11 @@
 
 <script lang="ts">
 import {IonButton, IonButtons, IonContent, IonHeader, IonPage, IonTitle, IonToolbar,} from "@ionic/vue";
-import {defineComponent} from "vue";
+import {defineComponent, ref} from "vue";
 import TheButton from '@/components/TheButton.vue';
 
 export default defineComponent({
   name: "ChooseMode",
-  data() {
-    return {
-      mode: 0,
-      money: 0,
-    };
-  },
   components: {
     IonButton,
     IonButtons,
@@ -48,7 +42,9 @@ export default defineComponent({
     TheButton,
   },
   setup() {
-    return {};
+    const money = ref<number>();
+    const mode = ref(0);
+    return {money, mode};
   },
 });
 </script>
@@ -86,7 +82,8 @@ export default defineComponent({
     color: white;
     font-weight: bold;
   }
-  input{
+
+  input {
     padding: 10px;
   }
 }

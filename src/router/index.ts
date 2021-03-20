@@ -12,12 +12,8 @@ const routes: Array<RouteRecordRaw> = [
     component: () => import("@/views/ChooseMode.vue"),
   },
   {
-    path: "/form/1",
+    path: "/form",
     component: () => import("@/views/Form.vue"),
-  },
-  {
-    path: "/form/2",
-    component: () => import("@/views/FormTwo.vue"),
   },
   {
     path: "/result",
