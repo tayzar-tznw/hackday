@@ -19,11 +19,6 @@
                 <ion-label>最低回数</ion-label>
                 <ion-input></ion-input>
               </ion-item>
-
-              <ion-item v-if="id==0">
-                <ion-label>優先度</ion-label>
-                <ion-input></ion-input>
-              </ion-item>
             </div>
 
           </ion-item-group>
@@ -36,18 +31,17 @@
 
 <script lang="ts">
 import {IonContent, IonHeader, IonPage, IonTitle, IonToolbar,} from '@ionic/vue';
-import {defineComponent, reactive} from "vue";
-import {useRoute} from 'vue-router'
+import {defineComponent, reactive, SetupContext} from "vue";
 
 type Props = {
   id: number;
 }
 export default defineComponent({
-  name: 'Form',
+  name: 'FormTwo',
   props: {
     id: {
-      type: String,
-      default: "0",
+      type: Number,
+      default: 0,
     }
   },
   components: {
@@ -57,7 +51,7 @@ export default defineComponent({
     IonContent,
     IonPage
   },
-  setup() {
+  setup(props: Props, context: SetupContext) {
     const games = reactive([
       {
         id: 0,

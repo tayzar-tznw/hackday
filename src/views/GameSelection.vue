@@ -37,7 +37,6 @@ export default defineComponent({
     IonPage
   },
   setup() {
-
     const games = reactive([
       {
         id: 0,
@@ -64,7 +63,6 @@ export default defineComponent({
         selected: false,
         img: require("@/assets/genshin.png")
       }
-
     ])
 
     const selectGame = (id: number) => {
