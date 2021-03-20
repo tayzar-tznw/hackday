@@ -61,25 +61,29 @@ export default defineComponent({
   setup() {
     const send = async (): Promise<ResponseData> => {
       // TODO: ちゃんとformからdataとる
+      console.log("send...")
+
       const dammyData: RequestData = {
-        game: ["0", "1", "2", "3", "4"], // 馬娘、バンドリ、原神、プロジェクト世界、パズドラ
+        game: [0, 1, 2, 3],// 馬娘、バンドリ、原神、プロジェクト世界、パズドラ
         moneyValue: 2500,
-        minimumDraw: {
+        min: {
           0: 2,
           1: 1,
           2: 0,
           3: 2,
         },
-        mode: "1"
+        mode: 1,
       }
       const res = await axios
-          .post(SERVER_URL, {
+          .post(SERVER_URL, 
             dammyData
-          })
+          )
           .then(res => {
+            console.log(res)
             return res.data
           })
           .catch(err => {
+            console.log("err happend...")
             console.log(err);
           })
       return res as ResponseData
