@@ -84,7 +84,7 @@ import { defineComponent, ref } from "vue";
 import Modal from "@/components/Modal.vue";
 
 export default defineComponent({
-  name: "Tab1",
+  name: "Result",
   data() {
     return {
       w: 0,
