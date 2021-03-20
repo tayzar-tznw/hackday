@@ -7,7 +7,7 @@
     </ion-header>
 
     <ion-content :fullscreen="true">
-      <form @submit.prevent="sendData">
+      <form @submit.prevent="send">
         <ion-list>
           <ion-item-group>
             <div v-for="game in games" :key="game.id">
@@ -34,15 +34,11 @@
 </template>
 
 <script lang="ts">
-import {
-  IonContent,
-  IonHeader,
-  IonPage,
-  IonTitle,
-  IonToolbar,
-} from "@ionic/vue";
-import { defineComponent, reactive } from "vue";
-import { useRoute } from "vue-router";
+import {IonContent, IonHeader, IonPage, IonTitle, IonToolbar,} from "@ionic/vue";
+import {defineComponent, reactive} from "vue";
+import {SERVER_URL} from "../const";
+import {RequestData, ResponseData} from "../types";
+import axios from 'axios';
 
 type Props = {
   id: number;
@@ -63,6 +59,32 @@ export default defineComponent({
     IonPage,
   },
   setup() {
+    const send = async (): Promise<ResponseData> => {
+      // TODO: ちゃんとformからdataとる
+      const dammyData: RequestData = {
+        game: ["0", "1", "2", "3", "4"], // 馬娘、バンドリ、原神、プロジェクト世界、パズドラ
+        moneyValue: 2500,
+        minimumDraw: {
+          0: 2,
+          1: 1,
+          2: 0,
+          3: 2,
+        },
+        mode: "1"
+      }
+      const res = await axios
+          .post(SERVER_URL, {
+            dammyData
+          })
+          .then(res => {
+            return res.data
+          })
+          .catch(err => {
+            console.log(err);
+          })
+      return res as ResponseData
+    };
+
     const games = reactive([
       {
         id: 0,
@@ -86,10 +108,7 @@ export default defineComponent({
       },
     ]);
 
-    const sendData = () => {
-      console.log("test");
-    };
-    return { games, sendData };
+    return {games, send,};
   },
 });
 </script>
