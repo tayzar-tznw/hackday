@@ -2,9 +2,9 @@
 export type RequestData = {
   game: GachaKey[];
   moneyValue: number;
-  minimumDraw: GachakeyPriorityData; // それぞれのガチャの最低draw回数
-  mode: "0" | "1" | "2";
-  optionPriority?: GachakeyPriorityData; // mode === 0　の時に入力される、ユーザー任意の優先度。
+  min: GachakeyPriorityData; // それぞれのガチャの最低draw回数
+  mode: 0 | 1 | 2;
+  c?: GachakeyPriorityData; // mode === 0　の時に入力される、ユーザー任意の優先度。
 };
 
 /*
@@ -15,7 +15,7 @@ export type RequestData = {
 ・プロジェクトセカイ：3
 ・パズドラ；4
 */
-type GachaKey = "0" | "1" | "2" | "3" | "4";
+type GachaKey = 0 | 1 | 2 | 3 | 4;
 
 type GachakeyPriorityData = {
   [gacha_key: string]: number;
