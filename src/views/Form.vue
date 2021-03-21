@@ -15,7 +15,7 @@
               <div style="width: 150px; display: inline;">
                 <label>優先度</label>
               </div>
-              <input/>
+              <input v-model="game.c"/>
             </div>
           </div>
           <div v-else class="gacha__times">
@@ -80,6 +80,7 @@ export default defineComponent({
         name: "馬娘",
         img: require("@/assets/uma.jpg"),
         minimumDraw: 0,
+        c: 0,
         times: 18,
         price: 347,
       },
@@ -88,6 +89,7 @@ export default defineComponent({
         name: "バンドリ",
         img: require("@/assets/bandori.jpg"),
         minimumDraw: 0,
+        c: 0,
         times: 18,
         price: 340,
       },
@@ -96,6 +98,7 @@ export default defineComponent({
         name: "原神",
         img: require("@/assets/genshin.jpg"),
         minimumDraw: 0,
+        c: 0,
         times: 18,
         price: 320,
       },
@@ -104,6 +107,7 @@ export default defineComponent({
         name: "プロジェクトセカイ",
         img: require("@/assets/sekai.jpg"),
         minimumDraw: 0,
+        c: 0,
         times: 18,
         price: 315,
       },
@@ -112,6 +116,7 @@ export default defineComponent({
         name: "パズドラ",
         img: require("@/assets/pazudora.jpg"),
         minimumDraw: 0,
+        c: 0,
         times: 18,
         price: 717,
       },
@@ -133,7 +138,9 @@ export default defineComponent({
         // eslint-disable-next-line @typescript-eslint/ban-ts-ignore
         //@ts-ignore
         game: [0, 1, 2, 3, 4],// 馬娘、バンドリ、原神、プロジェクト世界、パズドラ
-        moneyValue: state.money,
+        // eslint-disable-next-line @typescript-eslint/ban-ts-ignore
+        //@ts-ignore
+        moneyValue: parseInt(state.money),
 
         min: {
           // eslint-disable-next-line @typescript-eslint/ban-ts-ignore
@@ -152,11 +159,27 @@ export default defineComponent({
           //@ts-ignore
           4: parseInt(games[4].minimumDraw),
         },
+        c: {   // eslint-disable-next-line @typescript-eslint/ban-ts-ignore
+          //@ts-ignore
+          0: parseInt(games[0].c),
+          // eslint-disable-next-line @typescript-eslint/ban-ts-ignore
+          //@ts-ignore
+          1: parseInt(games[1].c),
+          // eslint-disable-next-line @typescript-eslint/ban-ts-ignore
+          //@ts-ignore
+          2: parseInt(games[2].c),
+          // eslint-disable-next-line @typescript-eslint/ban-ts-ignore
+          //@ts-ignore
+          3: parseInt(games[3].c),
+          // eslint-disable-next-line @typescript-eslint/ban-ts-ignore
+          //@ts-ignore
+          4: parseInt(games[4].c),
+        },
         // eslint-disable-next-line @typescript-eslint/ban-ts-ignore
         //@ts-ignore
         mode: 1,
       }
-      console.log(dammyData);
+
       const res = await axios
           .post(SERVER_URL,
               dammyData
