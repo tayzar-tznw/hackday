@@ -4,7 +4,7 @@
       <ion-toolbar>
         <ion-title>5つのゲームを選択</ion-title>
         <ion-buttons slot="end">
-          <ion-button @click="$router.push('/mode')">次へ</ion-button>
+          <ion-button @click="setGame()">次へ</ion-button>
         </ion-buttons>
       </ion-toolbar>
     </ion-header>
@@ -34,7 +34,8 @@ import {
   IonToolbar,
 } from "@ionic/vue";
 import { defineComponent, reactive } from "vue";
-
+import store from "../store/store";
+import { useRouter } from 'vue-router'
 export default defineComponent({
   name: "GameSelection",
   components: {
@@ -45,6 +46,8 @@ export default defineComponent({
     IonPage,
   },
   setup() {
+    store.init();
+    const router = useRouter()
     const games = reactive([
       {
         id: 0,
@@ -72,11 +75,16 @@ export default defineComponent({
         img: require("@/assets/genshin.png"),
       },
     ]);
-
     const selectGame = (id: number) => {
       games[id].selected = !games[id].selected;
     };
-    return { selectGame, games };
+    const setGame = (): void => {
+      const selected = games.filter( game => game.selected === true ).map(selected => selected.id ) as number[]
+      store.setGame(selected)
+      router.push('/mode')
+    }
+    return { selectGame, games, setGame };
+
   },
 });
 </script>

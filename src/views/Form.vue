@@ -17,12 +17,12 @@
 
               <ion-item>
                 <ion-label>最低回数</ion-label>
-                <ion-input></ion-input>
+                <ion-input v-model="game.min"></ion-input>
               </ion-item>
 
               <ion-item v-if="id == 0">
                 <ion-label>優先度</ion-label>
-                <ion-input></ion-input>
+                <ion-input v-model="game.priority"></ion-input>
               </ion-item>
             </div>
           </ion-item-group>
@@ -34,23 +34,24 @@
 </template>
 
 <script lang="ts">
-import {IonContent, IonHeader, IonPage, IonTitle, IonToolbar,} from "@ionic/vue";
-import {defineComponent, reactive} from "vue";
-import {SERVER_URL} from "../const";
-import {RequestData, ResponseData} from "../types";
-import axios from 'axios';
+import {
+  IonContent,
+  IonHeader,
+  IonPage,
+  IonTitle,
+  IonToolbar,
+} from "@ionic/vue";
+import { defineComponent, reactive, ref } from "vue";
+import { SERVER_URL } from "../const";
+import store from "../store/store";
+import { RequestData, ResponseData } from "../types";
+import axios from "axios";
 
 type Props = {
   id: number;
 };
 export default defineComponent({
   name: "Form",
-  props: {
-    id: {
-      type: String,
-      default: "0",
-    },
-  },
   components: {
     IonHeader,
     IonToolbar,
@@ -59,12 +60,54 @@ export default defineComponent({
     IonPage,
   },
   setup() {
+    const games = reactive([
+      {
+        id: 0,
+        name: "馬娘",
+        min:0,
+        priority:0
+      },
+      {
+        id: 1,
+        name: "バンドリ",
+        min:0,
+        priority:0
+      },
+      {
+        id: 2,
+        name: "原神",
+        min:0,
+        priority:0
+      },
+      {
+        id: 3,
+        name: "プロジェクトセカイ",
+        min:0,
+        priority:0
+      },
+      {
+        id: 4,
+        name: "パズドラ",
+        min:0,
+        priority:0
+      },
+    ]);
+    const id = ref<number>(store.getMode())
+    const selectedGame = store.getGame()
+    const mindata = Object.assign({}, ...selectedGame.map((id) => ({
+      [id]: games.find(game => game.id === id)?.min,
+    })));
+   
     const send = async (): Promise<ResponseData> => {
-      // TODO: ちゃんとformからdataとる
-      console.log("send...")
-
+      console.log("send...");
+      const data = {
+        game: selectedGame,
+        moneyValue: Number(store.getMoney()),
+        min: mindata,
+        mode: store.getMode()
+      }
       const dammyData: RequestData = {
-        game: [0, 1, 2, 3],// 馬娘、バンドリ、原神、プロジェクト世界、パズドラ
+        game: [0, 1, 2, 3], // 馬娘、バンドリ、原神、プロジェクト世界、パズドラ
         moneyValue: 2500,
         min: {
           0: 2,
@@ -73,46 +116,24 @@ export default defineComponent({
           3: 2,
         },
         mode: 1,
-      }
+      };
+      console.log(data)
+      console.log(dammyData)
+
       const res = await axios
-          .post(SERVER_URL, 
-            dammyData
-          )
-          .then(res => {
-            console.log(res)
-            return res.data
-          })
-          .catch(err => {
-            console.log("err happend...")
-            console.log(err);
-          })
-      return res as ResponseData
+        .post(SERVER_URL,data)
+        .then((res) => {
+          console.log(res);
+          return res.data;
+        })
+        .catch((err) => {
+          console.log("err happend...");
+          console.log(err);
+        });
+      return res as ResponseData;
     };
 
-    const games = reactive([
-      {
-        id: 0,
-        name: "馬娘",
-      },
-      {
-        id: 1,
-        name: "バンドリ",
-      },
-      {
-        id: 2,
-        name: "原神",
-      },
-      {
-        id: 3,
-        name: "プロジェクトセカイ",
-      },
-      {
-        id: 4,
-        name: "パズドラ",
-      },
-    ]);
-
-    return {games, send,};
+    return { games, send, id };
   },
 });
 </script>
