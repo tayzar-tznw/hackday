@@ -17,7 +17,7 @@
         </div>
 
         <div class="input-box__button">
-          <TheButton @click="$router.push('/form')">次へ</TheButton>
+          <TheButton @click="goToForm">次へ</TheButton>
         </div>
       </div>
     </div>
@@ -25,26 +25,33 @@
 </template>
 
 <script lang="ts">
-import {IonButton, IonButtons, IonContent, IonHeader, IonPage, IonTitle, IonToolbar,} from "@ionic/vue";
+import {IonPage} from "@ionic/vue";
 import {defineComponent, ref} from "vue";
 import TheButton from '@/components/TheButton.vue';
+import {useStore} from 'vuex';
+import {useRouter} from 'vue-router'
 
 export default defineComponent({
   name: "ChooseMode",
   components: {
-    IonButton,
-    IonButtons,
-    IonHeader,
-    IonToolbar,
-    IonTitle,
-    IonContent,
     IonPage,
     TheButton,
   },
   setup() {
+    const router = useRouter();
+    // const route = useRoute();
     const money = ref<number>();
     const mode = ref(0);
-    return {money, mode};
+    const store = useStore();
+    store.commit('changemode', 0);
+
+    const goToForm = () => {
+      store.commit('changemode', mode);
+      store.commit('addMoney', money);
+      router.push('/form');
+    }
+
+    return {money, mode, goToForm};
   },
 });
 </script>
