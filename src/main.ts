@@ -25,9 +25,11 @@ import "./theme/variables.css";
 
 import { defineCustomElements } from "@ionic/pwa-elements/loader";
 
+import {store} from "./store";
+
 defineCustomElements(window);
 
-const app = createApp(App).use(IonicVue).use(router);
+const app = createApp(App).use(IonicVue).use(router).use(store);
 
 router.isReady().then(() => {
   app.mount("#app");
