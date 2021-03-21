@@ -29,7 +29,7 @@ import {IonPage} from "@ionic/vue";
 import {defineComponent, ref} from "vue";
 import TheButton from '@/components/TheButton.vue';
 import {useStore} from 'vuex';
-import {useRouter} from 'vue-router'
+import {useRouter} from 'vue-router';
 
 export default defineComponent({
   name: "ChooseMode",

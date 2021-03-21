@@ -2,7 +2,7 @@
   <ion-page>
     <div class="wrapper game">
       <div class="gacha" v-for="game in games" :key="game.id">
-        <GameBox :img-src="game.img">
+        <GameBox :img-src="game.img" v-if="state.selectedGames.includes(game.id)">
           <div v-if="beforeSent">
             <div class="gacha__first-input">
               <div style="width: 120px; display: inline;">
@@ -65,8 +65,10 @@ export default defineComponent({
     IonPage,
   },
   setup() {
+    const TOTALGAMES = 7;
     const store = useStore();
-    const state = reactive<{ mode: number; money: number }>({
+    const state = reactive<{ selectedGames: Array<number>; mode: number; money: number }>({
+      selectedGames: store.state.selectedGames,
       mode: store.state.mode,
       money: store.state.money,
     });
@@ -81,16 +83,16 @@ export default defineComponent({
         img: require("@/assets/uma.jpg"),
         minimumDraw: 0,
         c: 0,
-        times: 18,
+        times: 0,
         price: 347,
       },
       {
         id: 1,
-        name: "バンドリ",
-        img: require("@/assets/bandori.jpg"),
+        name: "パズドラ",
+        img: require("@/assets/pazudora.jpg"),
         minimumDraw: 0,
         c: 0,
-        times: 18,
+        times: 0,
         price: 340,
       },
       {
@@ -99,7 +101,7 @@ export default defineComponent({
         img: require("@/assets/genshin.jpg"),
         minimumDraw: 0,
         c: 0,
-        times: 18,
+        times: 0,
         price: 320,
       },
       {
@@ -108,23 +110,42 @@ export default defineComponent({
         img: require("@/assets/sekai.jpg"),
         minimumDraw: 0,
         c: 0,
-        times: 18,
+        times: 0,
         price: 315,
       },
       {
         id: 4,
-        name: "パズドラ",
-        img: require("@/assets/pazudora.jpg"),
+        name: "NieR",
+        img: require("@/assets/nier.jpg"),
         minimumDraw: 0,
         c: 0,
-        times: 18,
+        times: 0,
+        price: 717,
+      },
+      {
+        id: 5,
+        name: "にゃんこ",
+        img: require("@/assets/nyan.jpeg"),
+        minimumDraw: 0,
+        c: 0,
+        times: 0,
+        price: 717,
+      },
+      {
+        id: 6,
+        name: "シャドバ",
+        img: require("@/assets/shadow.jpg"),
+        minimumDraw: 0,
+        c: 0,
+        times: 0,
         price: 717,
       },
     ]);
 
+
     const getTotal = () => {
       let temp = 0;
-      for (let i = 0; i < 5; i++) {
+      for (let i = 0; i < TOTALGAMES; i++) {
         temp += games[i].price * games[i].times;
       }
       total.value = temp;
@@ -158,6 +179,12 @@ export default defineComponent({
           // eslint-disable-next-line @typescript-eslint/ban-ts-ignore
           //@ts-ignore
           4: parseInt(games[4].minimumDraw),
+          // eslint-disable-next-line @typescript-eslint/ban-ts-ignore
+          //@ts-ignore
+          5: parseInt(games[5].minimumDraw),
+          // eslint-disable-next-line @typescript-eslint/ban-ts-ignore
+          //@ts-ignore
+          6: parseInt(games[6].minimumDraw),
         },
         c: {   // eslint-disable-next-line @typescript-eslint/ban-ts-ignore
           //@ts-ignore
@@ -174,6 +201,12 @@ export default defineComponent({
           // eslint-disable-next-line @typescript-eslint/ban-ts-ignore
           //@ts-ignore
           4: parseInt(games[4].c),
+          // eslint-disable-next-line @typescript-eslint/ban-ts-ignore
+          //@ts-ignore
+          5: parseInt(games[5].c),
+          // eslint-disable-next-line @typescript-eslint/ban-ts-ignore
+          //@ts-ignore
+          6: parseInt(games[6].c),
         },
         // eslint-disable-next-line @typescript-eslint/ban-ts-ignore
         //@ts-ignore
@@ -189,7 +222,7 @@ export default defineComponent({
             const temp = res.data;
 
             for (const keys in temp) {
-              for (let i = 0; i < 5; i++) {
+              for (let i = 0; i < TOTALGAMES; i++) {
                 if (games[i].name === keys) {
                   games[i].times = temp[keys];
                 }

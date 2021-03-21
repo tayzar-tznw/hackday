@@ -2,6 +2,7 @@ import {createStore} from "vuex";
 
 export interface State {
     todoList: Array<{ id: number; todo: string }>;
+    selectedGames: Array<number>;
     mode: number;
     money: number;
 }
@@ -9,6 +10,7 @@ export interface State {
 export const store = createStore<State>({
     state: {
         todoList: [],
+        selectedGames: [],
         mode: 0,
         money: 0,
     },
@@ -23,6 +25,9 @@ export const store = createStore<State>({
         },
         changemode(state, value) {
             state.mode = value;
+        },
+        addSelectedGames(state, value) {
+            state.selectedGames.push(value);
         },
         addMoney(state, value) {
             state.money = value;
