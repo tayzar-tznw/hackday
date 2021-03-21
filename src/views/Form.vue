@@ -79,8 +79,8 @@ export default defineComponent({
     const games = reactive([
       {
         id: 0,
-        name: "馬娘",
-        img: require("@/assets/uma.jpg"),
+        name: "ウマ娘",
+        img: require("@/assets/uma.png"),
         minimumDraw: 0,
         c: 0,
         times: 0,
@@ -89,7 +89,7 @@ export default defineComponent({
       {
         id: 1,
         name: "パズドラ",
-        img: require("@/assets/pazudora.jpg"),
+        img: require("@/assets/pazudora.png"),
         minimumDraw: 0,
         c: 0,
         times: 0,
@@ -98,7 +98,7 @@ export default defineComponent({
       {
         id: 2,
         name: "原神",
-        img: require("@/assets/genshin.jpg"),
+        img: require("@/assets/gensin.png"),
         minimumDraw: 0,
         c: 0,
         times: 0,
@@ -106,8 +106,8 @@ export default defineComponent({
       },
       {
         id: 3,
-        name: "プロジェクトセカイ",
-        img: require("@/assets/sekai.jpg"),
+        name: "プロセカ",
+        img: require("@/assets/puroseka.png"),
         minimumDraw: 0,
         c: 0,
         times: 0,
@@ -116,29 +116,29 @@ export default defineComponent({
       {
         id: 4,
         name: "NieR",
-        img: require("@/assets/nier.jpg"),
+        img: require("@/assets/nier.png"),
         minimumDraw: 0,
         c: 0,
         times: 0,
-        price: 717,
+        price: 283,
       },
       {
         id: 5,
         name: "にゃんこ",
-        img: require("@/assets/nyan.jpeg"),
+        img: require("@/assets/nyanko.png"),
         minimumDraw: 0,
         c: 0,
         times: 0,
-        price: 717,
+        price: 545,
       },
       {
         id: 6,
         name: "シャドバ",
-        img: require("@/assets/shadow.jpg"),
+        img: require("@/assets/syadoba.png"),
         minimumDraw: 0,
         c: 0,
         times: 0,
-        price: 717,
+        price: 240,
       },
     ]);
 
@@ -158,7 +158,7 @@ export default defineComponent({
       const dammyData: RequestData = {
         // eslint-disable-next-line @typescript-eslint/ban-ts-ignore
         //@ts-ignore
-        game: [0, 1, 2, 3, 4],// 馬娘、バンドリ、原神、プロジェクト世界、パズドラ
+        game: state.selectedGames,// 馬娘、バンドリ、原神、プロジェクト世界、パズドラ
         // eslint-disable-next-line @typescript-eslint/ban-ts-ignore
         //@ts-ignore
         moneyValue: parseInt(state.money),
@@ -218,13 +218,15 @@ export default defineComponent({
               dammyData
           )
           .then(res => {
-            // console.log(res.data)
+            console.log(res.data)
             const temp = res.data;
 
+            console.log(dammyData);
             for (const keys in temp) {
               for (let i = 0; i < TOTALGAMES; i++) {
                 if (games[i].name === keys) {
                   games[i].times = temp[keys];
+                  console.log(games[i].name + ":" + games[i].times);
                 }
               }
             }

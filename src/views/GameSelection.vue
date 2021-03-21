@@ -19,7 +19,6 @@
         </div>
       </div>
     </ion-content>
-
   </ion-page>
 </template>
 
@@ -44,37 +43,37 @@ export default defineComponent({
       {
         id: 0,
         selected: false,
-        img: require("@/assets/uma.jpg"),
+        img: require("@/assets/uma.png"),
       },
       {
         id: 1,
         selected: false,
-        img: require("@/assets/pazudora.jpg"),
+        img: require("@/assets/pazudora.png"),
       },
       {
         id: 2,
         selected: false,
-        img: require("@/assets/genshin.jpg"),
+        img: require("@/assets/gensin.png"),
       },
       {
         id: 3,
         selected: false,
-        img: require("@/assets/sekai.jpg"),
+        img: require("@/assets/puroseka.png"),
       },
       {
         id: 4,
         selected: false,
-        img: require("@/assets/nier.jpg"),
+        img: require("@/assets/nier.png"),
       },
       {
         id: 5,
         selected: false,
-        img: require("@/assets/nyan.jpeg"),
+        img: require("@/assets/nyanko.png"),
       },
       {
         id: 6,
         selected: false,
-        img: require("@/assets/shadow.jpg"),
+        img: require("@/assets/syadoba.png"),
       },
     ]);
 
@@ -109,6 +108,8 @@ export default defineComponent({
 
 .game {
   &__button {
+    height: 30px;
+    align-items: flex-start;
     display: flex;
     justify-content: center;
   }
@@ -122,7 +123,7 @@ export default defineComponent({
 
   &__item {
     width: 40%;
-    padding: 10px;
+    padding: 5px 10px;
 
     img {
       width: 100%;
