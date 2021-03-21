@@ -40,27 +40,27 @@ export default defineComponent({
       {
         id: 0,
         selected: false,
-        img: require("@/assets/uma.png"),
+        img: require("@/assets/uma.jpg"),
       },
       {
         id: 1,
         selected: false,
-        img: require("@/assets/bandori.png"),
+        img: require("@/assets/bandori.jpg"),
       },
       {
         id: 2,
         selected: false,
-        img: require("@/assets/genshin.png"),
+  img: require("@/assets/genshin.jpg"),
       },
       {
         id: 3,
         selected: false,
-        img: require("@/assets/genshin.png"),
+          img: require("@/assets/sekai.jpg"),
       },
       {
         id: 4,
         selected: false,
-        img: require("@/assets/genshin.png"),
+      img: require("@/assets/pazudora.jpg"),
       },
     ]);
 
